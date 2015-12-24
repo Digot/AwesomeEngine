@@ -34,8 +34,7 @@ public abstract class Scene {
 
     public void unloadScene(){
         for (GameObject gameObject : gameObjects) {
-            Disposable disposable = (Disposable) gameObject;
-            disposable.dispose();
+            gameObject.dispose();
         }
 
         this.unload();

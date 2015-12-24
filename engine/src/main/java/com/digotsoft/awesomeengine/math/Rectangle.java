@@ -18,5 +18,6 @@ public abstract class Rectangle implements GameObject {
     private Vector2D position;
     private int width;
     private int height;
+    private int rotation;
 
 }
