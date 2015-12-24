@@ -1,6 +1,7 @@
 package com.digotsoft.awesomeengine.game;
 
 import com.digotsoft.awesomeengine.exception.DisplayInitializationException;
+import com.digotsoft.awesomeengine.util.Color;
 import com.digotsoft.awesomeengine.util.Utils;
 import lombok.Getter;
 import org.lwjgl.LWJGLException;
@@ -23,6 +24,7 @@ public abstract class GameWindow extends Scene {
     private int width;
     private int height;
     private int targetFramerate = 60;
+    private Color clearColor;
 
     private Scene currentScene;
     private Set<Scene> registeredScenes;
@@ -38,6 +40,10 @@ public abstract class GameWindow extends Scene {
     public GameWindow(String title, int width, int height, int targetFramerate) throws DisplayInitializationException {
         this(title,width, height);
         this.targetFramerate = targetFramerate;
+    }
+
+    public void setClearColor(Color color){
+        glClearColor(color.getR(), color.getG(), color.getB(), color.getAlpha());
     }
 
     protected void initialize() throws DisplayInitializationException {

@@ -5,6 +5,7 @@ import com.digotsoft.awesomeengine.math.Vector2D;
 import com.digotsoft.awesomeengine.util.Color;
 import lombok.Getter;
 import lombok.Setter;
+
 import static org.lwjgl.opengl.GL11.*;
 
 /**
@@ -17,23 +18,30 @@ public class ColoredCircle extends Circle {
 
     private Color color;
 
-    public ColoredCircle(Vector2D position, double radius, Color color) {
+    public ColoredCircle(Vector2D position, float radius, Color color) {
         super(position, radius);
         this.color = color;
     }
 
     @Override
     public void render() {
-        glBegin(GL_LINE_LOOP);
 
-        for(int i =0; i <= 300; i++){
-            double angle = 2 * Math.PI * i / 300;
-            double x = Math.cos(angle);
-            double y = Math.sin(angle);
-            glVertex2d(x,y);
+        int i;
+        int triangleAmount = 20; //# of triangles used to draw circle
+
+        //GLfloat radius = 0.8f; //radius
+        float twicePi = (float) (2.0f * Math.PI);
+
+        glBegin(GL_TRIANGLE_FAN);
+        glVertex2d(getPosition().getX(), getPosition().getY()); // center of circle
+        for(i = 0; i <= triangleAmount;i++) {
+            glVertex2d(
+                    getPosition().getX() + (getRadius() * Math.cos(i *  twicePi / triangleAmount)),
+                    getPosition().getY() + (getRadius() * Math.sin(i * twicePi / triangleAmount))
+            );
         }
-
         glEnd();
+
     }
 
     @Override

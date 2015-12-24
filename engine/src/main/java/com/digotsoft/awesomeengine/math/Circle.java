@@ -15,6 +15,6 @@ import lombok.Setter;
 public abstract class Circle implements GameObject {
 
     private Vector2D position;
-    private double radius;
+    private float radius;
 
 }
